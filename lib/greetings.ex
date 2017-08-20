@@ -4,10 +4,18 @@ defmodule Greetings do
     greet("my friend")
   end
 
-  def greet([name | [another_name | []]]) do
-    "#{name} and #{another_name}" |> greet
+  def greet([name | tail]) do
+    greet(name, tail)
   end
-  
+
+  defp greet(accumulated, [name | []]) do
+    "#{accumulated} and #{name}" |> greet
+  end  
+
+  defp greet(accumulated, [name | more_names]) do
+    "#{accumulated}, #{name}," |> greet(more_names)    
+  end
+
   def greet(name) do
     cond do
       name |> shout? -> "HELLO #{name}!"
