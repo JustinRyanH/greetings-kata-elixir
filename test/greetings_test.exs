@@ -6,4 +6,9 @@ defmodule GreetingsTest do
     assert Greetings.greet("Bob") == "Hello, Bob."
     assert Greetings.greet("Jill") == "Hello, Jill."
   end
+
+  test "handles null" do
+    assert Greetings.greet() == "Hello, my friend."
+  end
+  
 end
