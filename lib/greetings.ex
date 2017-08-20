@@ -5,7 +5,10 @@ defmodule Greetings do
   end
 
   def greet(name) do
-    "Hello, #{name}."
+    cond do
+      String.upcase(name) == name -> "HELLO #{name}!"
+      true -> "Hello, #{name}."
+    end
   end
 
 end
