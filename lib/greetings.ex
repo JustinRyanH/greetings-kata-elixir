@@ -6,9 +6,12 @@ defmodule Greetings do
 
   def greet(name) do
     cond do
-      String.upcase(name) == name -> "HELLO #{name}!"
+      shout?(name) -> "HELLO #{name}!"
       true -> "Hello, #{name}."
     end
   end
 
+  defp shout?(name) do
+    String.upcase(name) == name
+  end 
 end
