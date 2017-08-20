@@ -20,7 +20,7 @@ defmodule Greetings do
   end
 
   defp greet(accumulated, [name | tail]) do
-    greet("#{accumulated} and #{name}", tail)
+    "#{accumulated} and #{name}" |> greet(tail)
   end  
 
   defp shout?(name) do
