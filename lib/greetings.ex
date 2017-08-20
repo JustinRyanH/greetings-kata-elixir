@@ -6,7 +6,7 @@ defmodule Greetings do
 
   def greet(name) do
     cond do
-      shout?(name) -> "HELLO #{name}!"
+      name |> shout? -> "HELLO #{name}!"
       true -> "Hello, #{name}."
     end
   end
