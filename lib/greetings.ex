@@ -4,23 +4,49 @@ defmodule Greetings do
     greet("my friend")
   end
 
-  def greet([name | tail]) do
-    greet(name, tail)
+  def greet([name | more_names]) do
+    [name | more_names] |> 
+    Enum.partition(&shout?(&1)) |>
+    greet()
   end
 
-  defp greet(accumulated, [name | []]) do
-    "#{accumulated} and #{name}" |> greet
-  end  
+  def greet({[], salutes}) do
+    salutes |> salute
+  end
 
-  defp greet(accumulated, [name | more_names]) do
-    "#{accumulated}, #{name}," |> greet(more_names)    
+  def greet({shouts, []}) do
+    shouts |> shout
+  end
+
+  def greet({shouts, salutes}) do
+    salute(salutes) <> " AND " <> shout(shouts)
   end
 
   def greet(name) do
     cond do
-      name |> shout? -> "HELLO #{name}!"
-      true -> "Hello, #{name}."
+      name |> shout?() -> name |> shout
+      true -> name |> salute
     end
+  end
+
+  defp salute([name | tail]) do
+    salute(name, tail)
+  end
+
+  defp salute(name) do
+    "Hello, #{name}."
+  end
+
+  defp salute(accumulated, [name | []]) do
+    "#{accumulated} and #{name}" |> greet
+  end  
+
+  defp salute(accumulated, [name | more_names]) do
+    "#{accumulated}, #{name}," |> salute(more_names)    
+  end
+
+  defp shout(name) do
+    "HELLO #{name}!"
   end
 
   defp shout?(name) do

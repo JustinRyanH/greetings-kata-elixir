@@ -22,4 +22,8 @@ defmodule GreetingsTest do
   test "handles arbitrary number of names" do
     assert Greetings.greet(["Amy", "Brian", "Charlotte"]) == "Hello, Amy, Brian, and Charlotte."
   end
+
+  test "allows mixing of normal and shouted names by separating the response into two greetings" do
+    assert Greetings.greet(["Amy", "BRIAN", "Charlotte"]) ==  "Hello, Amy and Charlotte. AND HELLO BRIAN!"
+  end
 end
