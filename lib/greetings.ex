@@ -5,15 +5,15 @@ defmodule Greetings do
     greet([name])
   end
   def greet(names) when is_list(names) do
-    { loud, gentle } = Enum.partition(names, fn x -> String.upcase(x) == x end)
-    _foo(gentle) <> shout(loud)
+    { upper, lower } = Enum.partition(names, fn x -> String.upcase(x) == x end)
+    _gentle(lower) <> shout(upper)
   end
-  defp _foo([]), do: ""
-  defp _foo([ only ]), do: "Hello, #{only}."
-  defp _foo([ first, second ]) do
+  defp _gentle([]), do: ""
+  defp _gentle([ only ]), do: "Hello, #{only}."
+  defp _gentle([ first, second ]) do
     "Hello, #{first} and #{second}."
   end
-  defp _foo([ first | tail ]) do
+  defp _gentle([ first | tail ]) do
     _gentle(tail, "Hello, #{first}")
   end
 
