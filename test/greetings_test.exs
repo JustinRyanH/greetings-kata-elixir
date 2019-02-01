@@ -22,4 +22,8 @@ defmodule GreetingsTest do
   test "greets more than two people" do
     assert Greetings.greet(["Amy", "Brain", "Charlotte"]) == "Hello, Amy, Brain, and Charlotte."
   end
+
+  test "shouts and greets at correct people" do
+    assert Greetings.greet(["Amy", "BRAIN", "Charlotte"]) == "Hello, Amy and Charlotte. AND HELLO BRAIN!"
+  end
 end
