@@ -1,6 +1,6 @@
 defmodule Greetings do
 
-  def greet() do
-    # implement me
+  def greet(name) do
+    "Hello, " <> name <> "."
   end
 end
