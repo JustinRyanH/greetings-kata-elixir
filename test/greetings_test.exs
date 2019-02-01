@@ -26,4 +26,8 @@ defmodule GreetingsTest do
   test "shouts and greets at correct people" do
     assert Greetings.greet(["Amy", "BRAIN", "Charlotte"]) == "Hello, Amy and Charlotte. AND HELLO BRAIN!"
   end
+
+  test "handles when strings are comma seperated" do
+    assert Greetings.greet(["Bob", "Charlie, Dianne"]) == "Hello, Bob, Charlie, and Dianne."
+  end
 end

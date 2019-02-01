@@ -1,9 +1,11 @@
 defmodule Greetings do
-
   def greet(), do: greet("my friend")
   def greet(name) when not is_list(name), do: greet([name])
   def greet(names) when is_list(names) do
-    { upper, lower } = Enum.partition(names, fn x -> String.upcase(x) == x end)
+    { upper, lower } = Enum.flat_map(names, fn x -> String.split(x, ",") end)
+      |> Enum.map(fn x -> String.trim(x) end)
+      |> Enum.partition(fn x -> String.upcase(x) == x end)
+
     case { _gentle(lower), _shout(upper) } do
       { nil, shout } -> shout
       { gentle, nil } -> gentle
