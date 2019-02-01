@@ -1,24 +1,31 @@
 defmodule Greetings do
 
-  def greet([ first, second ]) do
+  def greet(), do: greet("my friend")
+  def greet(name) when not is_list(name) do
+    greet([name])
+  end
+  def greet(names) when is_list(names) do
+    { loud, gentle } = Enum.partition(names, fn x -> String.upcase(x) == x end)
+    _foo(gentle) <> shout(loud)
+  end
+  defp _foo([]), do: ""
+  defp _foo([ only ]), do: "Hello, #{only}."
+  defp _foo([ first, second ]) do
     "Hello, #{first} and #{second}."
   end
-  def greet(name) when is_list(name) do
-    _greet_list(name, "Hello")
+  defp _foo([ first | tail ]) do
+    _gentle(tail, "Hello, #{first}")
   end
-  def greet(name) do
-    case String.upcase(name) == name do
-      true -> shout(name)
-      false -> gentle(name)
-    end
-  end
-  def greet(), do: greet("my friend")
-  def gentle(name), do: "Hello, #{name}."
-  def shout(name), do: "HELLO #{name}!"
-  defp _greet_list([ head | [] ], result) do
+
+  
+  # def gentle(name), do: "Hello, #{name}."
+  def shout([]), do: ""
+  def shout([name]), do: "HELLO #{name}!"
+
+  defp _gentle([ head | [] ], result) do
     "#{result}, and #{head}."
   end
-  defp _greet_list([ head | tail ], result) do
-    _greet_list(tail, "#{result}, #{head}")
+  defp _gentle([ head | tail ], result) do
+    _gentle(tail, "#{result}, #{head}")
   end
 end
