@@ -10,22 +10,14 @@ defmodule Greetings do
   end
   defp _gentle([]), do: ""
   defp _gentle([ only ]), do: "Hello, #{only}."
-  defp _gentle([ first, second ]) do
-    "Hello, #{first} and #{second}."
-  end
-  defp _gentle([ first | tail ]) do
-    _gentle(tail, "Hello, #{first}")
-  end
-
+  defp _gentle([ first, second ]), do: "Hello, #{first} and #{second}."
   
-  # def gentle(name), do: "Hello, #{name}."
+  defp _gentle([ first | tail ]), do: _gentle(tail, "Hello, #{first}")
+  defp _gentle([ head ], result), do: "#{result}, and #{head}."
+  defp _gentle([ head | tail ], result), do: _gentle(tail, "#{result}, #{head}")
+  
   def shout([]), do: ""
   def shout([name]), do: "HELLO #{name}!"
 
-  defp _gentle([ head | [] ], result) do
-    "#{result}, and #{head}."
-  end
-  defp _gentle([ head | tail ], result) do
-    _gentle(tail, "#{result}, #{head}")
-  end
+
 end
