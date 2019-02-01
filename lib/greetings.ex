@@ -21,6 +21,4 @@ defmodule Greetings do
   
   defp _shout([]), do: nil
   defp _shout([name]), do: "HELLO #{name}!"
-
-
 end
